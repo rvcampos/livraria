@@ -36,8 +36,16 @@ public class CategoriaController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		request.setAttribute("categorias", dao.listarCategorias());
-		request.getRequestDispatcher("WEB-INF/categorias/listarCategorias.jsp").forward(request, response);
+		if("POST".equals(request.getMethod()))
+		{
+			response.sendRedirect("../categoria");
+		}
+		else
+		{
+			request.setAttribute("categorias", dao.listarCategorias());
+			request.getRequestDispatcher("WEB-INF/categorias/listarCategorias.jsp")
+			.forward(request, response);
+		}
 	}
 
 	/**
@@ -46,7 +54,20 @@ public class CategoriaController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		String pathInfo = request.getPathInfo();
+		if (pathInfo != null) {
+
+			switch (pathInfo.replace("/", "")) {
+			case "delete":
+				dao.deleteCategoria(Integer.valueOf(request
+						.getParameter("id_categoria")));
+				request.removeAttribute("categorias");
+				break;
+			default:
+				System.out.println("Passei por aqui");
+			}
+		}
+		doGet(request, response);
 	}
 
 }

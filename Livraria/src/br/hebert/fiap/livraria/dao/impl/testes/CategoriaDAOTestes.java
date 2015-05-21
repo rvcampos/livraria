@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -75,6 +76,18 @@ public class CategoriaDAOTestes implements CategoriaDAOInterface {
 	public void close() {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public boolean deleteCategoria(Integer idCategoria) {
+		for (Iterator<Categoria> it = categoriasDummy.iterator();it.hasNext();) {
+			Categoria cat = it.next();
+			if (idCategoria.intValue()==cat.getId()) {
+				it.remove();
+				break;
+			}
+		}
+		return true;
 	}
 
 }

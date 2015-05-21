@@ -39,7 +39,6 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>LivroController</servlet-name>
-    <url-pattern>/livro</url-pattern>
     <url-pattern>/livro/*</url-pattern>
   </servlet-mapping>
   <servlet>
@@ -50,7 +49,6 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>CategoriaController</servlet-name>
-    <url-pattern>/categoria</url-pattern>
     <url-pattern>/categoria/*</url-pattern>
   </servlet-mapping>
 </web-app>

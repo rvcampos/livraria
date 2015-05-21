@@ -28,7 +28,9 @@ public interface CategoriaDAOInterface {
 	 * @return <code>true</code> quando existe uma categoria com o mesmo nome
 	 */
 	public boolean verificaDuplicidade(String nome);
-	
+
 	public void close();
+
+	public boolean deleteCategoria(Integer idCategoria);
 
 }

@@ -19,6 +19,7 @@ public class CategoriaDAO extends BaseDAO implements CategoriaDAOInterface {
 	private static final String sqlInsertCategoria = "INSERT INTO CATEGORIA (nome) VALUES (?)";
 	private static final String sqlVerificaDuplicidade = "SELECT 1 FROM CATEGORIA WHERE lower(nome) = lower(?)";
 	private static final String sqlListarCategorias = "SELECT * FROM CATEGORIA";
+	private static final String sqlDeletarCategoria = "DELETE CATEGORIA WHERE id_categoria = ?";
 
 	public CategoriaDAO() throws SQLException {
 		super();
@@ -87,6 +88,22 @@ public class CategoriaDAO extends BaseDAO implements CategoriaDAOInterface {
 		} finally {
 			DBUtils.close(pstm);
 			DBUtils.close(rs);
+		}
+		return false;
+	}
+
+	@Override
+	public boolean deleteCategoria(Integer idCategoria) {
+		PreparedStatement pstm = null;
+
+		try {
+			pstm = conn.prepareStatement(sqlDeletarCategoria);
+			pstm.setInt(1, idCategoria);
+			return pstm.executeUpdate() > 0;
+		} catch (Exception e) {
+			logger.throwing(this.getClass().getName(), "deleteCategoria", e);
+		} finally {
+			DBUtils.close(pstm);
 		}
 		return false;
 	}
